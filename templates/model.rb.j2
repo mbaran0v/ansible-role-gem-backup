@@ -23,10 +23,10 @@ end
   #
   database MySQL, :"{{ dbs.name }}" do |db|
     # To dump all databases, set `db.name = :all` (or leave blank)
-    {% if dbs.db == 'all' %}
-    db.name               = :all
-    {% else %}
+    {% if dbs.db is defined %}
     db.name               = "{{ dbs.db }}"
+    {% else %}
+    db.name               = :all
     {% endif %}
     db.username           = "{{ dbs.username }}"
 {% if dbs.password is defined %}
@@ -51,10 +51,10 @@ end
   #
   database PostgreSQL, ":{{ dbs.name }}" do |db|
     # To dump all databases, set `db.name = :all` (or leave blank)
-    {% if dbs.db == 'all' %}
-    db.name               = :all
-    {% else %}
+    {% if dbs.db is defined %}
     db.name               = "{{ dbs.db }}"
+    {% else %}
+    db.name               = :all
     {% endif %}
     db.username           = "{{ dbs.username | d('postgres') }}"
 {% if dbs.password is defined %}
